@@ -1,0 +1,20 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP", "RUF"]
+ignore = [
+    # FastAPI intentionally evaluates Depends/File/Query in parameter defaults.
+    "B008",
+    # SQLAlchemy/Pydantic enum behavior is already migrated and tested with
+    # the explicit str + Enum form; changing it deserves its own migration.
+    "UP042",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/conftest.py" = ["E402"]

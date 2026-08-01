@@ -1,0 +1,168 @@
+/* Brand tokens and their light/dark semantic mappings. */
+
+:root {
+  color-scheme: light;
+
+  --paper: #f8f3ea;
+  --ink: #292823;
+  --moss: #536852;
+  --marigold: #d5982f;
+  --berry: #8f4e61;
+  --sand: #e6d7c2;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #fdfaf5;
+  --card-foreground: var(--ink);
+  --popover: #fffdf9;
+  --popover-foreground: var(--ink);
+  --primary: var(--moss);
+  --primary-foreground: #fffdf8;
+  --secondary: var(--sand);
+  --secondary-foreground: #353229;
+  --muted: #eee5d8;
+  --muted-foreground: #6f6a60;
+  --accent: #eed9a9;
+  --accent-foreground: #45351a;
+  --destructive: #a7473f;
+  --border: #d9cbb8;
+  --input: #cfc0ad;
+  --ring: #6d806a;
+
+  --chart-1: var(--moss);
+  --chart-2: var(--marigold);
+  --chart-3: var(--berry);
+  --chart-4: var(--sand);
+  --chart-5: color-mix(in oklch, var(--moss) 55%, var(--marigold) 45%);
+  --chart-6: color-mix(in oklch, var(--berry) 55%, var(--sand) 45%);
+  --chart-7: color-mix(in oklch, var(--marigold) 55%, var(--berry) 45%);
+  --chart-8: color-mix(in oklch, var(--moss) 40%, var(--ink) 20%);
+
+  --radius: 0.75rem;
+  --elevation-soft: 0 1px 2px rgb(56 47 35 / 6%), 0 8px 28px rgb(56 47 35 / 5%);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --paper: #201f1b;
+  --ink: #f3ede3;
+  --moss: #a8bda2;
+  --marigold: #e5b65d;
+  --berry: #ca8499;
+  --sand: #4a4238;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #292722;
+  --card-foreground: var(--ink);
+  --popover: #2e2b26;
+  --popover-foreground: var(--ink);
+  --primary: var(--moss);
+  --primary-foreground: #1d241c;
+  --secondary: var(--sand);
+  --secondary-foreground: #f4eadc;
+  --muted: #35322c;
+  --muted-foreground: #b8afa3;
+  --accent: #57482f;
+  --accent-foreground: #f4dfb7;
+  --destructive: #de8278;
+  --border: #4a463e;
+  --input: #585248;
+  --ring: #a8bda2;
+
+  --chart-1: var(--moss);
+  --chart-2: var(--marigold);
+  --chart-3: var(--berry);
+  --chart-4: var(--sand);
+  --chart-5: color-mix(in oklch, var(--moss) 55%, var(--marigold) 45%);
+  --chart-6: color-mix(in oklch, var(--berry) 55%, var(--sand) 45%);
+  --chart-7: color-mix(in oklch, var(--marigold) 55%, var(--berry) 45%);
+  --chart-8: color-mix(in oklch, var(--moss) 40%, var(--ink) 20%);
+
+  --elevation-soft: 0 1px 2px rgb(0 0 0 / 18%), 0 10px 32px rgb(0 0 0 / 14%);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-moss: var(--moss);
+  --color-marigold: var(--marigold);
+  --color-berry: var(--berry);
+  --color-sand: var(--sand);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-serif: Iowan Old Style, Baskerville, "Times New Roman", serif;
+
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+
+  --shadow-soft: var(--elevation-soft);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    min-width: 20rem;
+    background: var(--background);
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100svh;
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--marigold) 36%, transparent);
+  }
+}

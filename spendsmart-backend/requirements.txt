@@ -1,0 +1,20 @@
+# Runtime dependencies pinned to the versions used by the tested application.
+
+fastapi==0.139.0
+uvicorn==0.50.2
+sqlalchemy==2.0.51
+psycopg2-binary==2.9.12
+alembic==1.18.5
+pydantic==2.13.4
+pydantic-settings==2.14.2
+python-jose[cryptography]==3.5.0
+bcrypt==5.0.0
+email-validator==2.3.0
+python-multipart==0.0.32
+# OCR pipeline
+pytesseract==0.3.13
+Pillow==11.0.0
+celery==5.6.3
+redis==5.2.0
+cloudinary==1.41.0
+requests==2.32.3
