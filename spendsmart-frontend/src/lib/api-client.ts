@@ -5,7 +5,7 @@ import { notifySessionExpired } from "@/auth/session-events";
 import type { TokenResponse } from "@/auth/auth-types";
 
 const clientOptions = {
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
   withCredentials: true,
 };
 

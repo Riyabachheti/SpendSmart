@@ -219,7 +219,7 @@ async def upload_receipt(
     db.commit()
     db.refresh(new_expense)
 
-    _enqueue_receipt_or_fail(new_expense, db)
+    _dispatch_receipt_or_fail(new_expense, db)
 
     return ReceiptUploadResponse(expense_id=new_expense.id, ocr_status=new_expense.ocr_status.value)
 
@@ -246,28 +246,38 @@ def retry_receipt_ocr(
 
     expense.ocr_status = OCRStatus.pending
     db.commit()
-    _enqueue_receipt_or_fail(expense, db)
+    _dispatch_receipt_or_fail(expense, db)
     return ReceiptUploadResponse(
         expense_id=expense.id,
         ocr_status=expense.ocr_status.value,
     )
 
 
-def _enqueue_receipt_or_fail(expense: Expense, db: Session) -> None:
+def _dispatch_receipt_or_fail(expense: Expense, db: Session) -> None:
     try:
-        process_receipt.delay(expense.id)
+        if settings.ocr_execution_mode == "inline":
+            process_receipt.run(expense.id)
+            db.refresh(expense)
+        else:
+            process_receipt.delay(expense.id)
     except Exception:
         logger.exception(
-            "Could not publish OCR task",
+            "Could not process or publish OCR task",
             extra={"expense_id": expense.id, "user_id": expense.user_id},
         )
-        expense.ocr_status = OCRStatus.failed
-        db.commit()
+        db.rollback()
+        expense = db.get(Expense, expense.id)
+        if expense is not None and expense.ocr_status in {
+            OCRStatus.pending,
+            OCRStatus.processing,
+        }:
+            expense.ocr_status = OCRStatus.failed
+            db.commit()
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail={
-                "message": "OCR queue is temporarily unavailable.",
-                "expense_id": expense.id,
+                "message": "Receipt processing is temporarily unavailable.",
+                "expense_id": expense.id if expense is not None else None,
             },
         ) from None
 

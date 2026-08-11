@@ -82,8 +82,8 @@ For receipt processing, run Redis and start a Celery worker in another terminal:
 .venv/bin/python -m celery -A app.core.celery_app.celery_app worker --pool=solo --loglevel=INFO
 ```
 
-The API is available at `http://localhost:8000`, with interactive documentation
-at `http://localhost:8000/docs`.
+The API is available at `http://localhost:8000/api`, with interactive
+documentation at `http://localhost:8000/api/docs`.
 
 ### Frontend
 
@@ -95,6 +95,14 @@ npm run dev
 ```
 
 Open `http://localhost:5173`.
+
+## Free deployment
+
+The repository includes a production Docker image and a Render Blueprint for a
+single-service, same-origin deployment. The complete architecture rationale,
+account setup, environment variables, verification gates, and operational
+limits are documented in
+[docs/DEPLOYMENT_DECISIONS.md](docs/DEPLOYMENT_DECISIONS.md).
 
 ## Tests and checks
 

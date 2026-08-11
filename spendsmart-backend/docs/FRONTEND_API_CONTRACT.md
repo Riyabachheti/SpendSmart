@@ -3,6 +3,10 @@
 This contract supersedes the legacy examples that placed access and refresh
 tokens in `localStorage`.
 
+All paths below are relative to the API base URL. In local development that is
+`http://localhost:8000/api`; in the combined deployment it is the same-origin
+path `/api`.
+
 ## Authentication
 
 - All Axios requests use `withCredentials: true`.

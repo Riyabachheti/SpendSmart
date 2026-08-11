@@ -44,6 +44,7 @@ export async function uploadReceipt(file: File) {
   const response = await apiClient.post<ReceiptUploadResponse>(
     "/expenses/receipts",
     formData,
+    { timeout: 90_000 },
   );
   return response.data;
 }
@@ -51,6 +52,8 @@ export async function uploadReceipt(file: File) {
 export async function retryReceiptOcr(expenseId: number) {
   const response = await apiClient.post<ReceiptUploadResponse>(
     `/expenses/${expenseId}/retry-ocr`,
+    undefined,
+    { timeout: 90_000 },
   );
   return response.data;
 }

@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     refresh_cookie_name: str = "spendsmart_refresh"
     refresh_cookie_secure: bool = False
     refresh_cookie_samesite: Literal["lax", "strict", "none"] = "lax"
-    refresh_cookie_path: str = "/auth"
+    refresh_cookie_path: str = "/api/auth"
     refresh_cookie_domain: str | None = None
     allowed_origins: list[str] = [
         "http://localhost:5173",
@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     cloudinary_api_key: str
     cloudinary_api_secret: str
     redis_url: str = "redis://localhost:6379/0"
+    ocr_execution_mode: Literal["queue", "inline"] = "queue"
     receipt_max_upload_bytes: int = Field(default=5 * 1024 * 1024, ge=1024)
     receipt_max_pixels: int = Field(default=20_000_000, ge=1_000_000)
     ocr_timeout_seconds: int = Field(default=30, ge=1, le=120)

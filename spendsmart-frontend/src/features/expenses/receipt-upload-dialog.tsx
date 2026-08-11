@@ -156,7 +156,7 @@ export function ReceiptUploadDialog({
         </form>
         <DialogFooter className="-mx-6 -mb-6 mt-2 p-6">
           <Button disabled={!file || mutation.isPending} form="receipt-upload-form" size="lg" type="submit">
-            {mutation.isPending ? "Uploading…" : "Upload receipt"}
+            {mutation.isPending ? "Reading receipt…" : "Upload receipt"}
           </Button>
           <Button disabled={mutation.isPending} onClick={() => onOpenChange(false)} size="lg" variant="outline">
             Cancel

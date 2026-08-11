@@ -40,7 +40,10 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 ALGORITHM = "HS256"
 
-
+# The following functions are responsible for creating and decoding JSON Web Tokens (JWTs) for authentication purposes.
+# The `_create_token` function generates a JWT with a specified expiration time, token type, and unique identifier (jti) for session tracking.
+#  The `create_access_token` and `create_refresh_token` functions create short-lived access tokens and long-lived refresh tokens, respectively.
+# The `decode_token` function verifies the JWT and returns its payload, ensuring that the token is valid and has the expected audience and issuer.
 def _create_token(data: dict, expires_delta: timedelta, token_type: str) -> str:
     """Create a typed JWT with a unique ID for session tracking."""
     to_encode = data.copy()
