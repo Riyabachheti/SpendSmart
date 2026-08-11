@@ -29,3 +29,6 @@ uploads/
 # Frontend artifacts
 node_modules/
 dist/
+
+# Local deployment notes
+docs/DEPLOYMENT_DECISIONS.md
