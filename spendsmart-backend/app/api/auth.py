@@ -181,6 +181,10 @@ def _invalid_refresh_response() -> JSONResponse:
 def _require_trusted_origin(request: Request) -> None:
     origin = request.headers.get("origin")
     trusted_origins = {item.rstrip("/") for item in settings.allowed_origins}
+    # The deployment hostname is assigned by the hosting platform. Trust the
+    # current request's own origin so same-origin refresh/logout requests work
+    # without a provider-specific environment variable.
+    trusted_origins.add(str(request.base_url).rstrip("/"))
     if origin is None or origin.rstrip("/") not in trusted_origins:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,

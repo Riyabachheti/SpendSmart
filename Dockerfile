@@ -9,6 +9,8 @@ RUN npm run build
 
 FROM python:3.13-slim AS runtime
 
+LABEL org.opencontainers.image.source="https://github.com/Riyabachheti/SpendSmart"
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1

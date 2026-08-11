@@ -32,3 +32,4 @@ dist/
 
 # Local deployment notes
 docs/DEPLOYMENT_DECISIONS.md
+docs/DEPLOYMENT_EXPLANATION.md

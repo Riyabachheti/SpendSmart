@@ -96,13 +96,18 @@ npm run dev
 
 Open `http://localhost:5173`.
 
-## Free deployment
+## Azure deployment
 
-The repository includes a production Docker image and a Render Blueprint for a
-single-service, same-origin deployment. The complete architecture rationale,
-account setup, environment variables, verification gates, and operational
-limits are documented in
-[docs/DEPLOYMENT_DECISIONS.md](docs/DEPLOYMENT_DECISIONS.md).
+The production Docker image is designed for a single-service, same-origin
+deployment on Azure Container Apps. The container serves the compiled React
+application and FastAPI under `/api`, listens on port `10000`, and runs OCR
+inline so a separate worker and Redis instance are not required. Production
+data and receipt images remain in Neon Postgres and Cloudinary.
+
+GitHub Actions builds the container image from `Dockerfile` and publishes it to
+GitHub Container Registry as `ghcr.io/riyabachheti/spendsmart`. Azure pulls the
+public image from that registry, avoiding a continuously billed Azure Container
+Registry for this student deployment.
 
 ## Tests and checks
 
